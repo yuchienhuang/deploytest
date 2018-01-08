@@ -5,7 +5,7 @@ function main() {
     last_post: 'Anon was here',
   };
   renderNavbar(user);
-  renderStories(user);
+  renderStories();
 }
 
 main();

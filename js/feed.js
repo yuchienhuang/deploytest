@@ -1,4 +1,6 @@
-function storyDOMObject(storyJSON, user) {
+const API_ENDPOINT = 'https://mit-wdc-workshop-1.herokuapp.com';
+
+function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
   card.setAttribute('id', storyJSON._id);
   card.className = 'story card';
@@ -49,14 +51,14 @@ function commentDOMObject(commentJSON) {
   return commentDiv;
 }
 
-function renderStories(user) {
+function renderStories() {
   const storiesDiv = document.getElementById('stories');
-  get('<external API link>/api/stories', {}, function(storiesArr) {
+  get(API_ENDPOINT + '/api/stories', {}, function(storiesArr) {
     for (let i = 0; i < storiesArr.length; i++) {
       const currentStory = storiesArr[i];
-      storiesDiv.prepend(storyDOMObject(currentStory, user));
+      storiesDiv.prepend(storyDOMObject(currentStory));
 
-      get('<external API link>/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
+      get(API_ENDPOINT + '/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
         for (let j = 0; j < commentsArr.length; j++) {
           const currentComment = commentsArr[j];
           const commentDiv = document.getElementById(currentComment.parent + '-comments');
