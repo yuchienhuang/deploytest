@@ -51,12 +51,12 @@ function commentDOMObject(commentJSON) {
 
 function renderStories(user) {
   const storiesDiv = document.getElementById('stories');
-  get('http://localhost:3000/api/stories', {}, function(storiesArr) {
+  get('<external API link>/api/stories', {}, function(storiesArr) {
     for (let i = 0; i < storiesArr.length; i++) {
       const currentStory = storiesArr[i];
       storiesDiv.prepend(storyDOMObject(currentStory, user));
 
-      get('http://localhost:3000/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
+      get('<external API link>/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
         for (let j = 0; j < commentsArr.length; j++) {
           const currentComment = commentsArr[j];
           const commentDiv = document.getElementById(currentComment.parent + '-comments');
