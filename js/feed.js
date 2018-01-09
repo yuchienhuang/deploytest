@@ -1,4 +1,4 @@
-const API_ENDPOINT = 'https://mit-wdc-workshop-1.herokuapp.com';
+const API_ENDPOINT_START = 'https://mit-wdc-workshop-1.herokuapp.com';
 
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
@@ -12,7 +12,6 @@ function storyDOMObject(storyJSON) {
   const creatorSpan = document.createElement('a');
   creatorSpan.className = 'story-creator card-title';
   creatorSpan.innerHTML = storyJSON.creator_name;
-  creatorSpan.setAttribute('href', '/u/profile?' + storyJSON.creator_id);
   cardBody.appendChild(creatorSpan);
 
   const contentSpan = document.createElement('p');
@@ -40,7 +39,6 @@ function commentDOMObject(commentJSON) {
   commentCreatorSpan = document.createElement('a');
   commentCreatorSpan.className = 'comment-creator';
   commentCreatorSpan.innerHTML = commentJSON.creator_name;
-  commentCreatorSpan.setAttribute('href', '/u/profile?' + commentJSON.creator_id);
   commentDiv.appendChild(commentCreatorSpan);
 
   commentContentSpan = document.createElement('span');
@@ -53,12 +51,12 @@ function commentDOMObject(commentJSON) {
 
 function renderStories() {
   const storiesDiv = document.getElementById('stories');
-  get(API_ENDPOINT + '/api/stories', {}, function(storiesArr) {
+  get(API_ENDPOINT_START + '/api/stories', {}, function(storiesArr) {
     for (let i = 0; i < storiesArr.length; i++) {
       const currentStory = storiesArr[i];
       storiesDiv.prepend(storyDOMObject(currentStory));
 
-      get(API_ENDPOINT + '/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
+      get(API_ENDPOINT_START + '/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
         for (let j = 0; j < commentsArr.length; j++) {
           const currentComment = commentsArr[j];
           const commentDiv = document.getElementById(currentComment.parent + '-comments');
