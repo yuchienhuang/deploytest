@@ -1,4 +1,4 @@
-const API_ENDPOINT_START = 'https://mit-wdc-workshop-1.herokuapp.com';
+const API_ENDPOINT_START = 'http://google-catbook.herokuapp.com/';
 
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
