@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/mit6148-workshops/catbook-workshop2#readme",
   "dependencies": {
+    "express": "^4.16.4",
     "http": "0.0.0"
   }
 }
