@@ -1,4 +1,4 @@
-const API_ENDPOINT_START = 'http://google-catbook.herokuapp.com/';
+const API_ENDPOINT_START = 'http://google-catbook.herokuapp.com';
 
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
@@ -51,12 +51,12 @@ function commentDOMObject(commentJSON) {
 
 function renderStories() {
   const storiesDiv = document.getElementById('stories');
-  get(API_ENDPOINT_START + '/api/stories', {}, function(storiesArr) {
+  get(API_ENDPOINT_START + '/api/stories', {}, function (storiesArr) {
     for (let i = 0; i < storiesArr.length; i++) {
       const currentStory = storiesArr[i];
       storiesDiv.prepend(storyDOMObject(currentStory));
 
-      get(API_ENDPOINT_START + '/api/comment', { 'parent': currentStory._id }, function(commentsArr) {
+      get(API_ENDPOINT_START + '/api/comment', { 'parent': currentStory._id }, function (commentsArr) {
         for (let j = 0; j < commentsArr.length; j++) {
           const currentComment = commentsArr[j];
           const commentDiv = document.getElementById(currentComment.parent + '-comments');
