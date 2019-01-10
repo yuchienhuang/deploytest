@@ -1,16 +1,24 @@
 const http = require('http');
 const express = require('express');
+const views = require('./routes/views');
 
 const app = express();
 
+app.use('/', views);
 app.use('/static', express.static('public'));
 
-app.get('/', function (req, res) {
-    res.sendFile('index.html', { root: 'src/views' });
+app.use(function (req, res, next) {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-app.get('/u/profile/', function (req, res) {
-    res.sendFile('profile.html', { root: 'src/views' });
+app.use(function (err, req, res, next) {
+    res.status(err.status | 500);
+    res.send({
+        status: err.status,
+        message: err.message,
+    })
 });
 
 const port = 3000;
