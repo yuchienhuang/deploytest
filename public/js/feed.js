@@ -1,4 +1,4 @@
-const API_ENDPOINT_START = 'http://google-catbook.herokuapp.com';
+const API_ENDPOINT_START = 'https://google-catbook.herokuapp.com';
 
 function storyDOMObject(storyJSON) {
   const card = document.createElement('div');
